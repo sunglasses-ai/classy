@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>Classy</ShortName>
+  <Description>Search Classy</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://sunglasses-ai.github.io/classy/img/classy_logo-short_transparent.png</Image>
+  <Url type="text/html" method="get" template="https://sunglasses-ai.github.io/classy/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://sunglasses-ai.github.io/classy/opensearch.xml" />
+  <moz:SearchForm>https://sunglasses-ai.github.io/classy/</moz:SearchForm>
+</OpenSearchDescription>
