@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from typing import Optional, Union
 
 import hydra
 import pytorch_lightning as pl
@@ -106,18 +107,16 @@ def train(conf: DictConfig) -> None:
         callbacks_store.append(learning_rate_monitor)
 
     # trainer
+    resume_from_checkpoint: Optional[Union[Path, str]] = None
     if conf.training.resume_from is not None:
-        trainer = pl.trainer.Trainer(
-            resume_from_checkpoint=conf.training.resume_from,
-            callbacks=callbacks_store,
-            logger=logger,
-        )
-    else:
-        trainer: pl.trainer.Trainer = hydra.utils.instantiate(
-            conf.training.pl_trainer,
-            callbacks=callbacks_store,
-            logger=logger,
-        )
+        resume_from_checkpoint = conf.training.resume_from
+
+    trainer: pl.trainer.Trainer = hydra.utils.instantiate(
+        conf.training.pl_trainer,
+        callbacks=callbacks_store,
+        logger=logger,
+        resume_from_checkpoint=resume_from_checkpoint,
+    )
 
     # save resources
     pl_module.save_resources_and_update_config(
